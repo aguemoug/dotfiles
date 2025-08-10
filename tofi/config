@@ -1,0 +1,13 @@
+width = 50%
+height = 50%
+border-width = 2
+outline-width = 2
+padding-left = 1%
+padding-top = 1%
+result-spacing = 5 
+font = JetBrainsMono NL SemiBold 
+font-size = 30
+background-color = #000000E6
+prompt-text = "Find an app: "
+placeholder-text = "search ..."
+result-spacing = 2
