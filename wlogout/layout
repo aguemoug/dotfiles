@@ -1,0 +1,18 @@
+{
+    "label" : "logout",
+    "action" : "~/.config/wlogout/power.sh exit",
+    "text" : "Log Out",
+    "keybind" : "e"
+}
+{
+    "label" : "reboot",
+    "action" : "~/.config/wlogout/power.sh reboot",
+    "text" : "Restart",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "~/.config/wlogout/power.sh shutdown",
+    "text" : "Power Off",
+    "keybind" : "s"
+}

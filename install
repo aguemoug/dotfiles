@@ -31,6 +31,11 @@ link_file "${PWD}/kitty" ~/.config/kitty
 link_file "${PWD}/hypr" ~/.config/hypr
 link_file "${PWD}/waybar" ~/.config/waybar
 link_file "${PWD}/tofi" ~/.config/tofi
+link_file "${PWD}/wlogout" ~/.config/wlogout
+
+sudo cp texclean /usr/local/bin/
+sudo cp texexam /usr/local/bin/
+sudo cp mkcircuit /usr/local/bin/
 
 if command -v hyprctl >/dev/null; then
     echo -e "${YELLOW}Reloading Hyprland...${RESET}"

@@ -15,7 +15,7 @@
         "pulseaudio",
         "network",
         "battery",
-				"clock",
+		"clock",
         "custom/power"
 		],
 		"hyprland/window": {
@@ -40,7 +40,16 @@
 		},
     "clock": {
         "tooltip-format": "{:%A, %B %d, %Y}",
-        "format": "{:%H:%M}"
+        "format": "{:%H:%M}",
+        	"calendar": {
+            		"mode": "month",
+            		"format": {
+                	    "months": "<span color='#ff6699'><b>{}</b></span>",
+                        "days": "<span color='#cdd6f4'><b>{}</b></span>",
+                	    "weekdays": "<span color='#7CD37C'><b>{}</b></span>",
+                	    "today": "<span color='#ffcc66'><b>{}</b></span>"
+            	}
+            }
     },
     "battery": {
         "states": {
@@ -69,7 +78,8 @@
 		},
     "custom/power": {
         "format": "󰐥",
-        "on-click": "sleep 0.15 && powermenu"
-    }
+        "on-click": "sleep 0.15 && wlogout"
+    },
+    "reload_style_on_change": true
 }
 

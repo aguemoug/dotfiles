@@ -81,6 +81,10 @@ plugins=(git archlinux zsh-syntax-highlighting zsh-autosuggestions  )
 
 source $ZSH/oh-my-zsh.sh
 
+# Load pyenv and pyenv-virtualenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"

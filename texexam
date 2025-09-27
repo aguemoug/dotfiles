@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e  # Exit on error
+
+# Check if a filename was passed
+if [ -z "$1" ]; then
+  echo "Usage: $0 <filename.tex>"
+  exit 1
+fi
+
+# Get full filename and strip the extension
+FULLFILE="$1"
+BASENAME="${FULLFILE%.tex}"
+
+# Check that the file exists
+if [ ! -f "$FULLFILE" ]; then
+  echo "Error: File '$FULLFILE' not found."
+  exit 1
+fi
+
+echo "Compiling questions only..."
+lualatex -interaction=nonstopmode -jobname="${BASENAME}" "\input{$FULLFILE}"
+
+echo "Compiling with answers..."
+lualatex -interaction=nonstopmode -jobname="${BASENAME}-sol" "\def\EnableExamSoloution{1}\input{$FULLFILE}"
+
+echo "Done! PDFs generated:"
+echo " - ${BASENAME}.pdf"
+echo " - ${BASENAME}-sol.pdf"
+texclean -y
