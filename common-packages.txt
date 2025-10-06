@@ -3,6 +3,7 @@ base-devel
 cups
 system-config-printer
 networkmanager
+zoxide
 openssh
 terminus-font
 wget
@@ -11,7 +12,7 @@ stow
 wl-clipboard
 wlogout
 xdg-desktop-portal-hyprland
-
+thunar
 clang
 cmake
 meson
