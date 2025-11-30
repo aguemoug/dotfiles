@@ -1,0 +1,81 @@
+    networkmanager
+    neovim
+    zathura
+    zathura-pdf-mupdf
+    nano
+    zsh
+    zsh-completions
+    openssh
+
+    black
+    skylua
+    astyle
+    harper-ls
+    python
+    base-devel
+    cmake
+    gcc
+    clang
+    meson
+    ninja
+    gdb
+    valgrind
+    cppcheck
+    boost
+    doxygen
+    git
+clang-tools-extra  # clangd, formatting, static analysis
+python-pip         # essential for Python dev
+tree               # useful CLI tool
+
+
+    texlive
+    bibtex-tidy
+    ltex-ls-plus
+    m4
+    texlab
+    imagemagick
+
+
+    firefox
+    libreoffice-fresh
+    pass
+    passff-host
+    pcmanfm
+    ark
+    p7zip
+    unrar
+    unzip
+    tar
+    feh
+    ttf-font-awesome
+    ttf-fira-sans
+    ttf-fira-code
+    ttf-firacode-nerd
+ttf-dejavu
+terminus-font
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+greetd
+greetd-tuigreet
+    wl-clipboard
+    python-dbus
+    hyprland
+    waybar
+    hyprpaper
+    hyprlock
+    hypridle
+    hyprpicker
+    wlogout
+    qt5-wayland
+    qt6-wayland
+    brightnessctl
+swappy           # screenshot editing
+grim             # screenshot tool
+slurp            # select region
+swaync           # Wayland notification daemon
+nwg-dock-hyprland
+xdg-desktop-portal
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk   # optional fallback

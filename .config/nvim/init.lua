@@ -13,7 +13,8 @@ vim.opt.relativenumber = true
 vim.opt.mouse = "a" -- mouse support
 
 vim.opt.showmode = false
-
+-- enable utf-8
+vim.opt.encoding = "utf-8" -- internal Vim encoding
 -- indentation
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -29,9 +30,12 @@ vim.opt.hlsearch = true
 vim.opt.termguicolors = true
 
 -- break indent
-vim.opt.breakindent = true
-
--- undo file
+vim.opt.wrap = true
+vim.opt.linebreak = false
+vim.opt.breakindent = false
+--vim.opt.showbreak = "↳ " -- optional: show a small indicator for wrap
+vim.opt.textwidth = 0
+vim.opt.wrapmargin = 2 -- start wrapping 2 chars before window edge
 vim.opt.undofile = true
 
 -- keep signcolumn always visible
@@ -121,6 +125,40 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+---------------------------------------
+---  PYTHON SPECIFIC MAPPINGS
+---
+---------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function(args)
+		local manim = require("custom.manim")
+		if manim.is_manim_file(args.buf) then
+			print("Detected manim file")
+			manim.enable_manim()
+		else
+			vim.keymap.set("n", "<F5>", ":w<CR>:!python %<CR>", {
+				buffer = true,
+				desc = "Save and execute Python file",
+			})
+
+			-- Method 1: Treesitter folding (recommended)
+			vim.opt_local.foldmethod = "expr"
+			vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+
+			-- Method 2: Indent folding (alternative - sometimes works better for Python)
+			-- vim.opt_local.foldmethod = "indent"
+
+			vim.opt_local.foldlevel = 10 -- Start with all folds open
+			vim.opt_local.foldnestmax = 10
+			vim.opt_local.foldminlines = 1
+
+			-- Auto-close folds when leaving them
+			vim.opt_local.foldclose = "all"
+		end
+	end,
+})
+
 ---------------------------
 --- M4 SPECIFIC MAPPINGS
 ---
@@ -148,26 +186,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 		-- Optional: Set other M4-specific settings
 		vim.opt_local.commentstring = "dnl %s" -- M4 comment syntax
-	end,
-})
-
----------------------------------------
----  PYTHON SPECIFIC MAPPINGS
----
----------------------------------------
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function(args)
-		local manim = require("custom.manim")
-		if manim.is_manim_file(args.buf) then
-			print("Detected manim file")
-			manim.enable_manim()
-		else
-			vim.keymap.set("n", "<F5>", ":w<CR>:!python %<CR>", {
-				buffer = true,
-				desc = "Save and execute Python file",
-			})
-		end
 	end,
 })
 
