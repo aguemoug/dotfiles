@@ -14,7 +14,7 @@
       ./hardware-configuration.nix
       ./configuration.nix
       ./boot.nix
-     # ./dev-tools.nix
+      ./dev-tools.nix
       ./consol.nix
       ./terminal.nix
       ./users.nix
@@ -22,7 +22,7 @@
       ./sound.nix
       # ./tex.nix
      # ./video.nix
-     # ./office.nix
+      ./office.nix
       ./settings.nix
 	];
     	};

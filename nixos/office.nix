@@ -4,6 +4,8 @@
 
 
   environment.systemPackages = with pkgs; [
+    #browswers
+    firefox
     # Office suite
     libreoffice               # full office suite (Writer, Calc, Impress, etc.)
     # Note-taking / knowledge management

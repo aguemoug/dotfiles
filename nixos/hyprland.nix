@@ -30,6 +30,6 @@
     hyprpaper
     hyprsunset
     hyprpolkitagent
-
+    rofi
   ];
 }
