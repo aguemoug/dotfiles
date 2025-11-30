@@ -2,7 +2,6 @@
 
 {
   programs.direnv.enable = true;
-
   environment.systemPackages = with pkgs; [
   clang-tools 
   lld 
@@ -24,7 +23,7 @@
   git
   lazygit
   sqlite
-
+  nodejs
   # LSPs
   python313Packages.python-lsp-server
   lua-language-server
@@ -33,5 +32,6 @@
     docker-compose-language-service
     hyprls
     texlab
+    tree-sitter
   ];
 }
