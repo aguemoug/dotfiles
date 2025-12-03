@@ -6,6 +6,11 @@
   # Set your time zone to Algeria.
   time.hardwareClockInLocalTime = true;
   time.timeZone = "Africa/Algiers";
+  programs.ssh.startAgent = true;
+  programs.ssh.extraConfig =''
+  Host github.com
+  IdentityFile   ~/.ssh/github_key
+  '';
 
 
   # Enable the OpenSSH daemon.
