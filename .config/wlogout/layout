@@ -1,18 +1,36 @@
 {
-    "label" : "logout",
-    "action" : "~/.config/wlogout/power.sh exit",
-    "text" : "Log Out",
-    "keybind" : "e"
+    "label" : "lock",
+    "action" : "hyprlock",
+    "text" : "Lock",
+    "keybind" : "l"
 }
 {
-    "label" : "reboot",
-    "action" : "~/.config/wlogout/power.sh reboot",
-    "text" : "Restart",
-    "keybind" : "r"
+    "label" : "hibernate",
+    "action" : "systemctl hibernate",
+    "text" : "Hibernate",
+    "keybind" : "h"
+}
+{
+    "label" : "logout",
+    "action" : "~/.config/wlogout/power.sh exit",
+    "text" : "Logout",
+    "keybind" : "e"
 }
 {
     "label" : "shutdown",
     "action" : "~/.config/wlogout/power.sh shutdown",
-    "text" : "Power Off",
+    "text" : "Shutdown",
     "keybind" : "s"
+}
+{
+    "label" : "suspend",
+    "action" : "systemctl suspend",
+    "text" : "Suspend",
+    "keybind" : "u"
+}
+{
+    "label" : "reboot",
+    "action" : "~/.config/wlogout/power.sh reboot",
+    "text" : "Reboot",
+    "keybind" : "r"
 }

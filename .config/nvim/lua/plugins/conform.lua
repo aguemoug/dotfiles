@@ -28,6 +28,8 @@ return {
 				bib = { "bibtex-tidy" },
 				c = { "clang-format" },
 				cpp = { "clang-format" },
+				json = { "prettier" },
+				jsonc = { "prettier" },
 			},
 			formatters = {
 				["clang-format"] = {
