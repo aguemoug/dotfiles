@@ -32,5 +32,6 @@
     hyprpolkitagent
     rofi
     waybar
+    wlogout
   ];
 }
