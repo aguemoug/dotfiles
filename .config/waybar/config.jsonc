@@ -1,5 +1,6 @@
 {
-  "layer": "bottom",
+  "layer": "top",
+  "position":"top",
   "height": 35,
   "spacing": 15,
   // Choose the order of the modules
@@ -7,9 +8,7 @@
 
   "modules-center": [
     "clock#time",
-    "custom/separator_dot",
     "clock#week",
-    "custom/separator_dot",
     "clock#calendar",
   ],
   //
@@ -27,6 +26,13 @@
     "tray",
     "custom/logout_menu",
   ],
+
+  "custom/logout_menu": {
+    "return-type": "json",
+    "exec": "echo '{ \"text\":\"󰐥\", \"tooltip\": \"logout menu\" }'",
+    "interval": "once",
+    "on-click": "wlogout",
+  },
   "hyprland/window": {
     "separate-outputs": true,
   },
@@ -80,11 +86,11 @@
 
   "network#wifi": {
     "interface": "wlps5s0",
-    "format":"wifi",
-    "format-wifi": "{essid} ({signalstrength}%) ",
+    "format":" 󰖪 ",
+    "format-wifi": "{essid} ({signalstrength}%)  ",
     "tooltip-format": "󰈀 {ifname} via {gwaddr}",
     "format-linked": " {ifname} (no ip)",
-    "format-disconnected": "disconnected",
+    "format-disconnected": "󰖪 ",
     "format-alt": "  {essid} ({signalstrength}%) ",
   },
 
@@ -202,12 +208,6 @@
     "on-click": "fish -c night_mode_toggle",
   },
 
-  "custom/logout_menu": {
-    "return-type": "json",
-    "exec": "echo '{ \"text\":\"󰐥\", \"tooltip\": \"logout menu\" }'",
-    "interval": "once",
-    "on-click": "wlogout",
-  },
 
   "reload_style_on_change": true,
 }
