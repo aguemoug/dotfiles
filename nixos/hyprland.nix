@@ -31,5 +31,6 @@
     hyprsunset
     hyprpolkitagent
     rofi
+    waybar
   ];
 }
