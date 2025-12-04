@@ -37,6 +37,7 @@
     liberation_ttf
     dejavu_fonts
     noto-fonts
+
   ];
   # Optional: enable clipboard integration for GUI apps
 }
