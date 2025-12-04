@@ -20,9 +20,12 @@
   boot.kernelParams = ["quiet"];
 
   #boot.loader.efi.canTouchEfiVariables = true;
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+
+ # Nix store config
+  nix.settings.auto-optimise-store = true;
+  nix.optimise.automatic = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -45,7 +48,6 @@
   # Enable services
   services.fwupd.enable = true;
   services.printing.enable = true;
-  services.openssh.enable = true;
 
 
   # Set your time zone to Algeria.
@@ -103,13 +105,6 @@
 
 
   programs.fish.enable = true;
-  nix.settings.auto-optimise-store = true;
-  nix.optimise.automatic = true;
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
-  };
 
 
 # add default users
@@ -178,6 +173,7 @@
     liberation_ttf
     dejavu_fonts
     noto-fonts
+    font-awesome
 
   ];
 }

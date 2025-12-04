@@ -13,7 +13,6 @@
       ./configuration.nix
       ./local.nix
       ./dev-tools.nix
-      ./terminal.nix
       ./hyprland.nix
        # ./tex.nix
        # ./video.nix
@@ -29,7 +28,6 @@
       ./laptop.nix
       ./local.nix
       ./dev-tools.nix
-      ./terminal.nix
       ./hyprland.nix
        # ./tex.nix
        # ./video.nix
