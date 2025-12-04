@@ -7,25 +7,36 @@
   outputs = { nixpkgs, ... } @ inputs:
   {
     nixosConfigurations = {
-
-    	sof-box = nixpkgs.lib.nixosSystem {
-      	specialArgs = { inherit inputs; };
-      		modules = [
-      ./hardware-configuration.nix
+      sof-box = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+       modules = [
       ./configuration.nix
-      ./boot.nix
+      ./local.nix
       ./dev-tools.nix
-      ./consol.nix
       ./terminal.nix
-      ./users.nix
       ./hyprland.nix
-      ./sound.nix
-      # ./tex.nix
-     # ./video.nix
+       # ./tex.nix
+       # ./video.nix
       ./office.nix
-      ./settings.nix
+	];
+    	};
+
+      # Laptop 
+      sof-laptop = nixpkgs.lib.nixosSystem {
+      specialArgs = { inherit inputs; };
+       modules = [
+      ./configuration.nix
+      ./laptop.nix
+      ./local.nix
+      ./dev-tools.nix
+      ./terminal.nix
+      ./hyprland.nix
+       # ./tex.nix
+       # ./video.nix
+      ./office.nix
 	];
     	};
     };
+
   };
 }
