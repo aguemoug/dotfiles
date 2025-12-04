@@ -1,4 +1,4 @@
-@define-color bg rgba(25, 25, 25, 0.65);
+@define-color bg rgba(25, 25, 25, 0.25);
 @define-color bg_tip rgba(0, 0, 0, 0.7);
 @define-color bg_transparant rgba(0, 0, 0, 0.0);
 @define-color border_main rgba(255, 255, 255, 0.2);
@@ -49,6 +49,8 @@
     font-size: 18px;
     font-weight: bold;
     border:none;
+    background-color: @bg;
+    color: @fg;
 }
 
 
@@ -62,6 +64,7 @@ window.top_bar .modules-center {
   margin-top: 5;
   margin-bottom: 5;
 }
+
 #workspaces button {
   color: @text;
   font-size: 1.25rem;
@@ -76,7 +79,6 @@ window.top_bar .modules-center {
 
 #custom-logout_menu {
   color: @red;
-  background-color: alpha(@surface1, 0.7);
   border-radius: 15 0 0 15;
   padding-left: 10;
   padding-right: 20;
@@ -94,9 +96,16 @@ window.top_bar .modules-center {
   margin-bottom: 5;
 }
 #network.disabled {
-  color: @subtext0;
+  color: alpha(@red,0.5);
 }
 
+#network.disconnected {
+  color: alpha(@red,0.7);
+}
+
+#network.connected {
+  color: alpha(@grn,0.7);
+}
 #keyboard-state label.locked {
   color: yellow;
 }

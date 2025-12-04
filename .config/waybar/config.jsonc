@@ -97,9 +97,9 @@
   "network#lan": {
     "interface": "eno1",
     "format-ethernet": "󰈀 ",
-    "tooltip-format": "󰈀 {ifname} {ipaddr}",
+    "tooltip-format": "󰈀{ipaddr}",
     "format-disconnected": "󰈀 ",
-    "format-disabled": "󰌙 ",
+    "format-disabled": "󰈀 ",
     "format-alt": " 󰈀  {ipaddr}",
   },
 
