@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     #browswers
     firefox
+    brave
     # Office suite
     libreoffice               # full office suite (Writer, Calc, Impress, etc.)
     # Note-taking / knowledge management
@@ -24,9 +25,13 @@
     slack
     zoom
     discord
+    telegram-desktop
     # Reference / bibliographies
     jabref                      # Manage BibTeX references
     zotero                      # Citation manager (via nixpkgs package or flatpak)
+    # other
+
+    youtube-music
   ];
 
   # Fonts

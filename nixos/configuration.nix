@@ -1,9 +1,52 @@
 
 { config, lib, pkgs, ... }:
 {
+
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
   nixpkgs.config.allowUnfree = true;
-  boot.loader.systemd-boot.enable = true;
+
+  #Boot configuration
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.consoleMode = "0";
+    systemd-boot.configurationLimit = 5;
+  };
+
+  boot.plymouth.enable = true;
+  boot.initrd.systemd.enable = true;
+  boot.kernelParams = ["quiet"];
+
+  #boot.loader.efi.canTouchEfiVariables = true;
+
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
+  users.users.sof = {
+    description = "Soufian";
+    home = "/home/sof";
+    shell=pkgs.fish;
+    extraGroups = [ "wheel" "networkmanager" "input" "video" "audio" "tss" ]; 
+    isNormalUser = true;
+    hashedPassword = "$6$7ETXUFXE7GyyT.Je$HcNQmpL2zIMmb7bvgwMs6iXOLJ/bdKN0Oe4Qhnx7ZbNEXRGgmft1.FHufTGNk.GNzFRcllQmUPPEBbZPnyISM1";
+  };
+
+  # Enable Bluetooth
+  hardware.bluetooth.enable = true;
+
+  # Enable services
+  services.fwupd.enable = true;
+  services.printing.enable = true;
+  services.openssh.enable = true;
+
 
   # Set your time zone to Algeria.
   time.hardwareClockInLocalTime = true;
@@ -15,6 +58,7 @@
   '';
 
   # Enable the OpenSSH daemon.
+
   services.openssh = {
     enable = true;
     settings = {
@@ -44,17 +88,10 @@
 
  # 
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  # services.avahi = {
-  #   enable = true;
-  #   nssmdns4 = true;
-  # };
-
 
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  #services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -65,6 +102,7 @@
   };
 
 
+  programs.fish.enable = true;
   nix.settings.auto-optimise-store = true;
   nix.optimise.automatic = true;
   nix.gc = {
@@ -76,30 +114,72 @@
 
 # add default users
 
-users.users.sof = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "input" "video" "audio" "tss" ]; 
-    initialPassword="1234";
-    shell=pkgs.fish;
-    packages = with pkgs; [
-    youtube-music
-    telegram-desktop
-    brave
-    ];
-   };
-
-
-
-
   environment.systemPackages = with pkgs; [
+    avahi
+    dmidecode
+    freshfetch
+    git
+    libcamera
+    lshw
+    unzip
+    xz
+    zlib
+    fish
+
+
+    # Terminal tools
+    neovim
+    stow
+    kitty
+    starship
+    moreutils
+    file
+    delta
+    ripgrep
+    procs
+    aria2
+    yt-dlp
+    duf
+    ncdu
+    dust
+    fd
+    zoxide
+    tokei
+    fzf
+    bat
+    hexyl
+    mdcat
+    pandoc
+    lsd
+    viu
+    tre-command
+    yazi
+    chafa
+    jrnl
+    rsclock
+    cava
+    figlet
+    lolcat
+    cbonsai
+    #wirless
     iwgtk
     impala
-
     #audio
     pamixer
     pavucontrol
   ];
 
 
+  # Fonts
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    nerd-font-patcher
+    noto-fonts-color-emoji
+    liberation_ttf
+    dejavu_fonts
+    noto-fonts
+
+  ];
 }
+
 
