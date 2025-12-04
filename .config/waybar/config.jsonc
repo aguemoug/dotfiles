@@ -1,10 +1,14 @@
 {
   "layer": "top",
+  "reload_style_on_change":true,
   "position":"top",
-  "height": 35,
-  "spacing": 15,
+  "height": 45,
+  "spacing": 5,
   // Choose the order of the modules
-  "modules-left": ["tray", "hyprland/workspaces", "hyprland/submap"],
+  "modules-left": [
+    "tray",
+    "hyprland/workspaces",
+    "hyprland/submap"],
 
   "modules-center": [
     "clock#time",
@@ -13,8 +17,8 @@
   ],
   //
   "modules-right": [
-    // "bluetooth",
-    //"idle_inhibitor",
+    "idle_inhibitor",
+    "bluetooth",
     "network#lan",
     "network#wifi",
     "pulseaudio",
@@ -44,12 +48,28 @@
     "format": "{icon} {temperatureC}°C",
     "format-icons": ["", "", ""],
   },
+
+
+  "bluetooth": {
+    "format-no-controller": "",
+  },
+
   "cpu": {
     "format": "  {usage}%",
   },
+
   "memory": {
     "format": " {}%",
   },
+
+    "idle_inhibitor": {
+      "format": "{icon} ",
+      "format-icons": {
+        "activated": " ",
+        "deactivated": " ",
+      },
+    },
+
     "backlight": {
       "format": "{icon} {percent}%",
       "format-icons": [
@@ -62,7 +82,7 @@
         "",
         "",
         ""
-      ]
+      ],
     },
 
    "keyboard-state": {
@@ -74,12 +94,12 @@
         "unlocked": ""
       }
     },
-
   "network#lan": {
     "interface": "eno1",
-    "format-ethernet": "󰈀",
+    "format-ethernet": "󰈀 ",
     "tooltip-format": "󰈀 {ifname} {ipaddr}",
-    "format-disconnected": "",
+    "format-disconnected": "󰈀 ",
+    "format-disabled": "󰌙 ",
     "format-alt": " 󰈀  {ipaddr}",
   },
 
@@ -97,12 +117,12 @@
 
     "pulseaudio": {
       "scroll-step": 5,
-      "format": "{icon}  {volume}% {format_source}",
+      "format": "{icon}  {volume}%",
       "format-bluetooth": " {icon} {volume}% {format_source}",
       "format-bluetooth-muted": "  {icon} {format_source}",
       "format-muted": "  {format_source}",
       "format-source": " {volume}%",
-      "format-source-muted": "",
+      "format-source-muted": " ",
       "format-icons": {
         "default": [
           "",
@@ -115,13 +135,6 @@
     }
   },
 
-    "idle_inhibitor": {
-      "format": "{icon}",
-      "format-icons": {
-        "activated": "",
-        "deactivated": ""
-      }
-    },
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
@@ -155,16 +168,17 @@
     "format": "<span color='#a6da95'>Mode:</span> {}",
     "tooltip": false,
   },
+
   "clock#time": {
     "format": "{:%I:%M}",
+  },
+  "clock#week": {
+    "format": "{:%a}",
   },
 
   "custom/separator": {
     "format": "|",
     "tooltip": false,
-  },
-  "clock#week": {
-    "format": "{:%a}",
   },
   "clock#month": {
     "format": "{:%h}",
@@ -209,5 +223,4 @@
   },
 
 
-  "reload_style_on_change": true,
 }
