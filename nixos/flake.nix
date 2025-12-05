@@ -1,6 +1,6 @@
 {
   description = "Abdessettar's NixOS Configuration";
-
+  inputs.nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   inputs = {
       nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
@@ -24,8 +24,7 @@
       sof-laptop = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
        modules = [
-      ./configuration.nix
-      ./laptop.nix
+      ./hosts/t480/configuration.nix
       ./local.nix
       ./dev-tools.nix
       ./hyprland.nix
