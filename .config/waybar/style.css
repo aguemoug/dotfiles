@@ -58,15 +58,18 @@ window.top_bar .modules-center {
   font-weight: bold;
   background-color: alpha(@surface1, 0.7);
   color: @peach;
-  border-radius: 15;
-  padding-left: 20;
-  padding-right: 20;
-  margin-top: 5;
-  margin-bottom: 5;
+  border-radius: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
+#workspaces {
+  margin-left: 10;
+}
 #workspaces button {
-  color: @text;
+  color: @red;
   font-size: 1.25rem;
 }
 #workspaces button.empty {
@@ -74,26 +77,39 @@ window.top_bar .modules-center {
 }
 
 #workspaces button.active {
-  color: @peach;
+  color: @yellow;
+}
+#workspaces button.empty {
+  color: @overlay0;
 }
 
+#submap {
+  background-color: alpha(@surface1, 0.7);
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 #custom-logout_menu {
   color: @red;
-  border-radius: 15 0 0 15;
-  padding-left: 10;
-  padding-right: 20;
-  margin-top: 5;
-  margin-bottom: 5;
+  border-radius: 15px 0 0 15px;
+  padding-left: 10px;
+  padding-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 #network {
   background-color: @bg_transparant;
-  border-radius: 5;
-  padding-left: 5;
-  padding-right: 5;
-  margin-left: 2;
-  margin-right: 2;
-  margin-top: 5;
-  margin-bottom: 5;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 #network.disabled {
   color: alpha(@red,0.5);
@@ -112,7 +128,7 @@ window.top_bar .modules-center {
 
 #keyboard-state label {
   color: @subtext0;
-  padding-left: 10;
-  padding-right: 20;
+  padding-left: 10px;
+  padding-right: 20px;
 }
 
