@@ -30,8 +30,9 @@
     hyprpaper
     hyprsunset
     hyprpolkitagent
-    rofi
+    walker
     waybar
     wlogout
+#    rose-pine-hyprcursor
   ];
 }

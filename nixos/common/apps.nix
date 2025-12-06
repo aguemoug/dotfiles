@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+  nemo-with-extensions
     firefox
     brave
     libreoffice               # full office suite (Writer, Calc, Impress, etc.)

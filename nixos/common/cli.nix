@@ -18,7 +18,7 @@
     zlib
     fish
     tree
-
+    wget
     # Terminal tools
     neovim
     stow
