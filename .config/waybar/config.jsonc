@@ -2,7 +2,7 @@
   "layer": "top",
   "reload_style_on_change":true,
   "position":"top",
-  "height": 45,
+  "height": 35,
   "spacing": 5,
   // Choose the order of the modules
   "modules-left": [
@@ -11,10 +11,11 @@
     "clock#day",
     "custom/separator_dot",
     "clock#calendar",
+    "tray",
+    "hyprland/window"
   ],
 
   "modules-center": [
-    
     "hyprland/workspaces",
   ],
 
@@ -28,6 +29,7 @@
     "pulseaudio",
     "backlight",
 //    "keyboard-state",
+    "disk",
     "temperature",
     "cpu",
     "memory",
@@ -35,16 +37,23 @@
     "custom/logout_menu",
   ],
 
+"disk": {
+    "interval": 60,
+    "path": "/",
+    "format": " {free}",
+},
 "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
         "format": "{icon} {capacity}%",
+    "format-alt": "{icon} {capacity}% {time}",
         "format-charging": " {capacity}% ",
         "format-plugged": " {capacity}%",
         "format-full": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", ""],
+        "format-time": "{H}:{M}",
     },
 
  "battery#bat2": {
@@ -57,29 +66,19 @@
       "format-disabled" : "󰂲",
       "format-no-controller": "",
 },
-
+"hyprland/window": {
+    "max-length": 40,
+    "separate-outputs": false
+},
   "hyprland/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "1": "󰲠",
-      "2": "󰲢",
-      "3": "󰲤",
-      "4": "󰲦",
-      "5": "󰲨",
-      "6": "󰲪",
-      "7": "󰲬",
-      "8": "󰲮",
-      "9": "󰲰",
-      "10": "󰿬",
-      //"special": "",
-       "active": "",
-       //"default": "",
-       "empty": ""
-    },
+    "format": "{name}",
     "show-special": true,
+    "persistent-workspaces": {
+        "*": 5,
+    },
   },
 
   "custom/separator_dot": {
@@ -91,12 +90,9 @@
     "format": "{:%H:%M}",
   },
 
-
   "clock#day": {
     "format": "{:%A}",
   },
-
-
   "clock#calendar": {
     "format": "{:%d/%m}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",
@@ -127,9 +123,6 @@
     "interval": "once",
     "on-click": "wlogout",
   },
-  "hyprland/window": {
-    "separate-outputs": true,
-  },
   "temperature": {
     "thermal-zone": 2,
     "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -141,11 +134,11 @@
 
 
   "cpu": {
-    "format": "  {usage}%",
+    "format": " {usage}%",
   },
 
   "memory": {
-    "format": " {}%",
+    "format": " {}%",
   },
 
     "idle_inhibitor": {
@@ -181,7 +174,7 @@
       }
     },
   "network#lan": {
-    "interface": "eth0",
+   // "interface": "eth0",
     "format-ethernet": "󰈀 ",
     "tooltip-format": "󰈀{ipaddr}",
     "format-disconnected": "󰈀 ",

@@ -46,7 +46,7 @@
 
 * {
     font-family: "JetBrainsMono", monospace;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     border:none;
     background-color: @bg;
@@ -68,19 +68,9 @@ window.top_bar .modules-center {
 #workspaces {
   margin-left: 10;
 }
-#workspaces button {
-  color: @red;
-  font-size: 1.25rem;
-}
-#workspaces button.empty {
-  color: @overlay0;
-}
 
 #workspaces button.active {
   color: @yellow;
-}
-#workspaces button.empty {
-  color: @overlay0;
 }
 
 #submap {
