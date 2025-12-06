@@ -25,12 +25,6 @@
       specialArgs = { inherit inputs; };
        modules = [
       ./hosts/t480/configuration.nix
-      ./local.nix
-      ./dev-tools.nix
-      ./hyprland.nix
-       # ./tex.nix
-       # ./video.nix
-      ./office.nix
 	];
     	};
     };

@@ -95,6 +95,7 @@
   margin-right: 2px;
   margin-top: 5px;
   margin-bottom: 5px;
+  color:@wht;
 }
 #network.disabled {
   color: alpha(@red,0.5);
@@ -106,6 +107,13 @@
 
 #network.connected {
   color: alpha(@grn,0.7);
+}
+
+#network.linked {
+  color: @grn;
+}
+#network#wifi.linked {
+  color: @grn;
 }
 #keyboard-state label.locked {
   color: yellow;
@@ -124,24 +132,48 @@
 #custom-sep {
     color: @brblk;
 }
+#idle_inhibitor
+{
 
+    color: @wht;
+}
 #clock {
     color: @peach;
 }
-
+#cpu{
+    color: @ylw;
+}
 #disk {
     color: @ylw;
 }
 
+#temperature{
+    color: @ylw;
+}
+
+#bluetooth{
+    color: @blue;
+}
 #memory {
-    color: @mag;
+    color: @wht;
 }
 
+#pulseaudio {
+    color: @wht;
+}
+
+#disk {
+    color: @wht;
+}
+
+#backlight {
+    color: @wht;
+}
+#battery {
+    color: @wht;
+}
 #cpu {
-    color: @grn;
+    color: @wht;
 }
 
-#network {
-    color: @blu;
-}
 

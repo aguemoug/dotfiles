@@ -183,7 +183,7 @@
       }
     },
   "network#lan": {
-   // "interface": "eth0",
+    "interface": "eth0",
     "format-ethernet": "󰈀 ",
     "tooltip-format": "󰈀{ipaddr}",
     "format-disconnected": "󰈀 ",
@@ -193,11 +193,11 @@
 
 
   "network#wifi": {
-    "interface": "wlan0",
-    "format":" 󰖪 ",
+//    "interface": "wlan0",
+    "format":" ",
     "format-wifi": "{essid} ({signalstrength}%)  ",
     "tooltip-format": "󰈀 {ifname} via {gwaddr}",
-    "format-linked": " {ifname} (no ip)",
+    "format-linked": " ",
     "format-disconnected": "󰖪 ",
     "format-alt": "  {essid} ({signalstrength}%) ",
   },
