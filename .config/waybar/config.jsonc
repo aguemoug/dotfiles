@@ -6,15 +6,12 @@
   "spacing": 5,
   // Choose the order of the modules
   "modules-left": [
-    "clock#time",
-    "custom/separator_dot",
+    "custom/sep",
     "clock#day",
-    "custom/separator_dot",
     "clock#calendar",
-    "tray",
-    "hyprland/window"
+    "custom/sep",
+    "clock#time",
   ],
-
   "modules-center": [
     "hyprland/workspaces",
   ],
@@ -24,17 +21,25 @@
     "battery#bat2",
     "idle_inhibitor",
     "bluetooth",
+    "custom/sep",
     "network#lan",
     "network#wifi",
+    "custom/sep",
     "pulseaudio",
     "backlight",
+    "custom/sep",
 //    "keyboard-state",
     "disk",
+    "custom/sep",
     "temperature",
+    "custom/sep",
     "cpu",
+    "custom/sep",
     "memory",
-    "tray",
+    "custom/sep",
     "custom/logout_menu",
+    "custom/sep",
+    "tray",
   ],
 
 "disk": {
@@ -80,7 +85,11 @@
         "*": 5,
     },
   },
-
+"custom/sep": {
+    "format": "|",
+    "interval": 0,
+    "tooltip": false
+},
   "custom/separator_dot": {
     "format": "•",
     "tooltip": false,

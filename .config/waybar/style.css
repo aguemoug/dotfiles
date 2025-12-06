@@ -50,29 +50,24 @@
     font-weight: bold;
     border:none;
     background-color: @bg;
+}
+
+
+#workspaces button {
+    padding: 0 6px;
     color: @fg;
+    background: transparent;
+    border-bottom: 3px solid @bg;
 }
-
-
-window.top_bar .modules-center {
-  font-weight: bold;
-  background-color: alpha(@surface1, 0.7);
-  color: @peach;
-  border-radius: 15px;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-#workspaces {
-  margin-left: 10;
-}
-
 #workspaces button.active {
-  color: @yellow;
+    color: @yellow;
 }
-
+#workspaces button.empty {
+    color: @wht;
+}
+#workspaces button.empty.active {
+    color: @cyn;
+}
 #submap {
   background-color: alpha(@surface1, 0.7);
   border-radius: 15px;
@@ -120,5 +115,33 @@ window.top_bar .modules-center {
   color: @subtext0;
   padding-left: 10px;
   padding-right: 20px;
+}
+#tray {
+    padding: 0 8px;
+    color: @white;
+}
+
+#custom-sep {
+    color: @brblk;
+}
+
+#clock {
+    color: @peach;
+}
+
+#disk {
+    color: @ylw;
+}
+
+#memory {
+    color: @mag;
+}
+
+#cpu {
+    color: @grn;
+}
+
+#network {
+    color: @blu;
 }
 
