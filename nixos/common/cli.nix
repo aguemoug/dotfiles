@@ -10,6 +10,9 @@
     avahi
     dmidecode
     freshfetch
+    pass
+    gnupg
+    passepartui
     git
     libcamera
     lshw

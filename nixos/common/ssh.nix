@@ -5,6 +5,10 @@
 { config,inputs, lib, pkgs, ... }:
 {
 
+  programs.gnupg.agent = {
+    enable = true;
+  };
+
   programs.ssh.startAgent = true;
   programs.ssh.extraConfig =''
   Host github.com

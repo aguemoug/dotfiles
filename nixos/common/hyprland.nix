@@ -28,11 +28,14 @@
     hyprpaper
     hyprsunset
     hyprpolkitagent
-    walker
     waybar
     wlogout
     hyprlauncher
     nwg-look
+    rofi
+    rofi-pass
+    rofimoji
+
 #    rose-pine-hyprcursor
   ];
 }
