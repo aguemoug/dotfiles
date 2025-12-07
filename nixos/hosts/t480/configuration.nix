@@ -17,6 +17,7 @@
     ../../common/ssh.nix
     ../../common/time.nix
     ../../common/users.nix
+    ../../common/tex.nix
   ];
 
 
