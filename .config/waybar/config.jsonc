@@ -185,21 +185,22 @@
   "network#lan": {
     "interface": "eth0",
     "format-ethernet": "󰈀 ",
+    "format-linked": "󰈀 ",
     "tooltip-format": "󰈀{ipaddr}",
-    "format-disconnected": "󰈀 ",
-    "format-disabled": "󰈀 ",
-    "format-alt": " 󰈀  {ipaddr}",
+    "format-disconnected": "󰌙 ",
+    "format": "󰈀 ",
+    "format-alt-ethernet": " 󰈀  {ipaddr}",
   },
 
 
   "network#wifi": {
-//    "interface": "wlan0",
-    "format":" ",
-    "format-wifi": "{essid} ({signalstrength}%)  ",
-    "tooltip-format": "󰈀 {ifname} via {gwaddr}",
-    "format-linked": " ",
-    "format-disconnected": "󰖪 ",
-    "format-alt": "  {essid} ({signalstrength}%) ",
+    "interface": "wlan0",
+    "format-wifi": " ",
+    "format": " ",
+    "tooltip-format-wifi": " {essid} :{signalStrength}%",
+    "format-disabled": "󰖪 ",
+    //"format-alt": "  {essid} ({signalStrength}%) ",
+    "on-double-click": "nmgui",
   },
 
 "pulseaudio": {
@@ -217,7 +218,7 @@
           ""
         ]
       },
-      "on-click": "pavucontrol",
+      "on-double-click": "pavucontrol",
       "on-click-right": "foot -a pw-top pw-top"
     }
   },
