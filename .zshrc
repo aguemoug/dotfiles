@@ -119,3 +119,4 @@ eval "$(pyenv virtualenv-init -)"
 
 
 eval "$(zoxide init --cmd cd zsh)"
+alias vv='NVIM_APPNAME=nvim-new nvim'
