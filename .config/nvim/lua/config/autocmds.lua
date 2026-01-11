@@ -1,99 +1,142 @@
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "tex",
+local function augroup(name)
+	return vim.api.nvim_create_augroup("user_" .. name, { clear = true })
+end
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	group = augroup("checktime"),
 	callback = function()
-		vim.keymap.set("n", "<F5>", ":w<CR>:VimtexCompile<CR>", { buffer = true })
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "c", "cpp" },
-	callback = function(args)
-		-- buffer-local mapping
-		vim.keymap.set("n", "<F5>", ":make<CR>:copen<CR>", { buffer = true })
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "c", "cpp" },
-	callback = function(args)
-		vim.opt_local.spell = false
-		vim.opt_local.complete:append("kspell")
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "python",
-	callback = function(args)
-		local manim = require("custom.manim")
-		if manim.is_manim_file(args.buf) then
-			print("Detected manim file")
-			manim.enable_manim()
-		else
-			vim.keymap.set("n", "<F5>", ":w<CR>:!python %<CR>", {
-				buffer = true,
-				desc = "Save and execute Python file",
-			})
-
-			-- Method 1: Treesitter folding (recommended)
-			vim.opt_local.foldmethod = "expr"
-			vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
-
-			-- Method 2: Indent folding (alternative - sometimes works better for Python)
-			-- vim.opt_local.foldmethod = "indent"
-
-			vim.opt_local.foldlevel = 10 -- Start with all folds open
-			vim.opt_local.foldnestmax = 10
-			vim.opt_local.foldminlines = 1
-
-			-- Auto-close folds when leaving them
-			vim.opt_local.foldclose = "all"
+		if vim.o.buftype ~= "nofile" then
+			vim.cmd("checktime")
 		end
 	end,
 })
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-	pattern = "*.m4",
-	callback = function()
-		-- Set filetype (creates buffer-local settings)
-		vim.cmd("set filetype=cm")
-
-		-- Load circuit macros module
-		local circuitmacro = require("custom.m4")
-
-		-- Create user command for manual compilation
-		vim.api.nvim_buf_create_user_command(0, "Mkcircuit", circuitmacro.compile_m4_to_png, {
-			desc = "Compile M4 file to PNG using circuit macros",
-		})
-
-		-- Set buffer-local keymap for F5
-		vim.keymap.set("n", "<F5>", circuitmacro.toggle_continuous_compile, {
-			buffer = true, -- Make it buffer-local
-			silent = true,
-			desc = "Toggle continuous M4 compilation",
-		})
-
-		-- Optional: Set other M4-specific settings
-		vim.opt_local.commentstring = "dnl %s" -- M4 comment syntax
-	end,
-})
-
--- Highlight when yanking (copying) text
+-- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	group = augroup("highlight_yank"),
 	callback = function()
-		vim.highlight.on_yank()
+		(vim.hl or vim.highlight).on_yank()
 	end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+	group = augroup("resize_splits"),
 	callback = function()
-		local args = vim.fn.argv()
-		if #args == 1 then
-			local stat = vim.loop.fs_stat(args[1])
-			if stat and stat.type == "directory" then
-				vim.cmd("Neotree filesystem reveal left")
-			end
+		local current_tab = vim.fn.tabpagenr()
+		vim.cmd("tabdo wincmd =")
+		vim.cmd("tabnext " .. current_tab)
+	end,
+})
+
+-- make it easier to close man-files when opened inline
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("man_unlisted"),
+	pattern = { "man" },
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+	end,
+})
+
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("close_with_q"),
+	pattern = {
+		"PlenaryTestPopup",
+		"checkhealth",
+		"dbout",
+		"gitsigns-blame",
+		"grug-far",
+		"help",
+		"lspinfo",
+		"neotest-output",
+		"neotest-output-panel",
+		"neotest-summary",
+		"notify",
+		"qf",
+		"spectre_panel",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(event)
+		vim.bo[event.buf].buflisted = false
+		vim.schedule(function()
+			vim.keymap.set("n", "q", function()
+				vim.cmd("close")
+				pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+			end, {
+				buffer = event.buf,
+				silent = true,
+				desc = "Quit buffer",
+			})
+		end)
+	end,
+})
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup("wrap_spell"),
+	pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.spell = true
+	end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	group = augroup("json_conceal"),
+	pattern = { "json", "jsonc", "json5" },
+	callback = function()
+		vim.opt_local.conceallevel = 0
+	end,
+})
+
+-- Auto create dir when saving a file, in case some intermediate directory does not exist
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	group = augroup("auto_create_dir"),
+	callback = function(event)
+		if event.match:match("^%w%w+:[/][/]") then
+			return
 		end
+		local file = vim.uv.fs_realpath(event.match) or event.match
+		vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+	end,
+})
+
+-- Set filetype for .env and .env.* files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup("env_filetype"),
+	pattern = { "*.env", ".env.*" },
+	callback = function()
+		vim.opt_local.filetype = "sh"
+	end,
+})
+
+-- Set filetype for .toml files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup("toml_filetype"),
+	pattern = { "*.tomg-config*" },
+	callback = function()
+		vim.opt_local.filetype = "toml"
+	end,
+})
+
+-- Set filetype for .ejs files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup("ejs_filetype"),
+	pattern = { "*.ejs", "*.ejs.t" },
+	callback = function()
+		vim.opt_local.filetype = "embedded_template"
+	end,
+})
+
+-- Set filetype for .code-snippets files
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+	group = augroup("code_snippets_filetype"),
+	pattern = { "*.code-snippets" },
+	callback = function()
+		vim.opt_local.filetype = "json"
 	end,
 })

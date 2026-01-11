@@ -1,0 +1,3 @@
+
+cd ~/dotfiles/
+stow .config
