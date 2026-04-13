@@ -18,6 +18,10 @@ require("conform").setup({
 	},
 	formatters = {
 		biome = { require_cwd = true },
+		["clang-format"] = {
+			-- This tells clang-format to look for the .clang-format file in your project
+			prepend_args = { "--style=file" },
+		},
 	},
 	default_format_opts = {
 		lsp_format = "fallback",

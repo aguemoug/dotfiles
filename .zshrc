@@ -118,3 +118,5 @@ eval "$(pyenv virtualenv-init -)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval "$(zoxide init --cmd cd zsh)"
+
+alias ghidra='/home/sof/soft/ghidra_12.0_PUBLIC/support/pyghidraRun'

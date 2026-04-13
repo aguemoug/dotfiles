@@ -1,12 +1,6 @@
 vim.pack.add({
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "main",
-	},
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-		version = "main",
-	},
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", lazy = false, build = ":TSUpdate" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 })
 
 require("nvim-treesitter").setup({})
@@ -30,7 +24,6 @@ require("nvim-treesitter").install({
 	"javascript",
 	"jsdoc",
 	"json",
-	"jsonc",
 	"lua",
 	"luadoc",
 	"luap",
@@ -143,5 +136,3 @@ vim.api.nvim_create_autocmd("FileType", {
 		end
 	end,
 })
-
-

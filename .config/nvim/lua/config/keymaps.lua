@@ -175,5 +175,7 @@ keymap("n", "<F2>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 keymap("n", "<F3>", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
 keymap("n", "<F4>", "<cmd>Telescope oldfiles<cr>", { desc = "Live grep" })
 
--- keymap("n", "<F3>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
--- keymap("n", "<F4>", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
+-- Manim
+
+map("n", "<leader>mm", "<cmd> ManimPlay<CR>", { desc = "Play manim scene under cursor", remap = true })
+map("v", "<leader>mm", "<cmd> ManimPlaySelection<CR>", { desc = "Play manim selected text", remap = true })

@@ -136,5 +136,5 @@ vim.opt.clipboard = "unnamedplus"
 vim.o.makeprg = "bash make.sh"
 
 vim.opt.spell = true
-
-
+-- vim.opt.autocmplete = true
+-- vim.o.autocomplete = true
