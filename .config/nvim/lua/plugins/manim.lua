@@ -1,4 +1,6 @@
 vim.pack.add({
-	{ src = "https://github.com/yeasin50/manim.nvim" },
+	{ src ="https://github.com/aguemoug/manim.nvim"
+
+    },
 })
 require("manim")
