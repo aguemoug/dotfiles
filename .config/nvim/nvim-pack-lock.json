@@ -21,9 +21,13 @@
       "rev": "21604255d0e8f9968322f61f2b6c09e5efe1285a",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
+    "live-server.nvim": {
+      "rev": "ca30bff556f9db8f25f37be865c630f32a8cc896",
+      "src": "https://github.com/barrettruth/live-server.nvim.git"
+    },
     "manim.nvim": {
-      "rev": "3543c20c12670ca5aa194d768a92123c61942c51",
-      "src": "https://github.com/aguemoug/manim.nvim"
+      "rev": "e2e97e6eea2b97e405c317fdd909822368321286",
+      "src": "https://github.com/aguemoug/manim.nvim.git"
     },
     "noice.nvim": {
       "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
@@ -72,6 +76,10 @@
     "telescope.nvim": {
       "rev": "3ab376cfae65b921dda454df5967f8df673effc6",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "toggleterm.nvim": {
+      "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
+      "src": "https://github.com/akinsho/toggleterm.nvim.git"
     },
     "which-key.nvim": {
       "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
