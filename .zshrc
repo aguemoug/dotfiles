@@ -120,3 +120,8 @@ eval "$(pyenv virtualenv-init -)"
 eval "$(zoxide init --cmd cd zsh)"
 
 alias ghidra='/home/sof/soft/ghidra_12.0_PUBLIC/support/pyghidraRun'
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
