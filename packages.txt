@@ -1,0 +1,8 @@
+
+
+cargo
+rsync
+fish
+starship
+eza
+mpv
