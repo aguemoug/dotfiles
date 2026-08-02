@@ -1,0 +1,7 @@
+
+Notification deamon
+dunst
+pipewire
+
+qt5-wayland
+qt6-wayland
