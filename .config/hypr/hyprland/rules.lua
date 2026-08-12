@@ -1,17 +1,25 @@
 --------------------------------------
 ---- WORKSPACE -> MONITOR MAPPING ----
 --------------------------------------
--- hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-3", default = true })
--- hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-3" })
--- hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-3" })
---
--- hl.workspace_rule({ workspace = "0", monitor = "DP-1", default = true })
--- hl.workspace_rule({ workspace = "1", monitor = "DP-1" })
--- hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
--- hl.workspace_rule({ workspace = "3", monitor = "DP-1" })
--- hl.workspace_rule({ workspace = "4", monitor = "DP-1" })
--- hl.workspace_rule({ workspace = "5", monitor = "DP-1" })
---
+for i = 0, 5 do
+	hl.workspace_rule({
+		workspace = tostring(i),
+		monitor = "DP-2",
+		default = i == 0,
+	})
+end
+
+for i = 6, 9 do
+	hl.workspace_rule({
+		workspace = tostring(i),
+		monitor = "DO- 1",
+	})
+end
+
+hl.workspace_rule({
+	workspace = "scratch",
+	monitor = "DO- 1",
+})
 -------------------------
 ---- WINDOW RULES  -----
 -------------------------

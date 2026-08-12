@@ -1,7 +1,7 @@
 -- MONITOR CONFIG
 
-hl.monitor({ output = "HDMI-A-3", mode = "1920x1080@60", position = "0x0", scale = 1 })
-hl.monitor({ output = "DP-1", mode = "1920x1080@60", position = "1920x0", scale = 1 })
+hl.monitor({ output = "DP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
+hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "1920x0", scale = 1 })
 
 -- gestures
 hl.gesture({
@@ -91,7 +91,7 @@ hl.config({
 			input_methods_ignorealpha = 0.8,
 		},
 		shadow = {
-			enabled = true,
+			enabled = false,
 			range = 20,
 			offset = { 0, 2 },
 			render_power = 10,
@@ -103,7 +103,7 @@ hl.config({
 		dim_special = 0.2,
 	},
 	animations = {
-		enabled = true,
+		enabled = false,
 	},
 	dwindle = {
 		preserve_split = true,
@@ -280,7 +280,7 @@ hl.config({
 		swallow_regex = "(foot|kitty|allacritty|Alacritty)",
 		on_focus_under_fullscreen = 2,
 		allow_session_lock_restore = true,
-		session_lock_xray = true,
+		session_lock_xray = false,
 		initial_workspace_tracking = false,
 		focus_on_activate = true,
 	},
@@ -291,7 +291,7 @@ hl.config({
 	},
 
 	cursor = {
-		zoom_factor = 1,
+		zoom_factor = 2,
 		zoom_rigid = false,
 		zoom_disable_aa = true,
 		hotspot_padding = 1,
