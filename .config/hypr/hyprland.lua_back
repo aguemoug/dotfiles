@@ -1,23 +1,50 @@
-------------------------
----- VARIABLES ---------
-------------------------
-local terminal = "kitty"
-local fileManager = "nemo"
-local menu = "rofi -show drun"
-local browser = "firefox"
-local ai = browser .. " --new-window https://chat.openai.com"
-local reload_waybar = "pkill waybar; waybar &"
-local mainMod = "SUPER"
+HOME = os.getenv("HOME")
 
-------------------------
----- MONITORS ----------
-------------------------
+function is_file_exists(name)
+	local f = io.open(name, "r")
+	if f ~= nil then
+		io.close(f)
+		return true
+	else
+		return false
+	end
+end
+
+function create_if_not_exists(path)
+	if not is_file_exists(path) then
+		os.execute('mkdir -p "$(dirname "' .. path .. '")"')
+		os.execute(
+			"echo '-- This file will not be overwritten across dots-hyprland updates.\n-- The file name is for the sake of organization and does not matter\n-- See the corresponding files in ~/.config/hypr/hyprland for examples' > \""
+				.. path
+				.. '"'
+		)
+		return true
+	end
+	return false
+end
+
+function workspace_in_group(i)
+	local curr = hl.get_active_workspace().id
+	local newVal = math.floor((curr - 1) / workspaceGroupSize) * workspaceGroupSize + i
+	-- hl.notification.create({ text = "curr " .. curr .. " floor " .. math.floor(curr / 10) .. " new " .. newVal, duration = 5000 })
+	return newVal
+end
+
+terminal = "kitty"
+
+fileManager = "nemo"
+menu = "rofi -show drun"
+browser = "firefox"
+ai = browser .. " --new-window https://chat.openai.com"
+reload_waybar = "pkill waybar; waybar &"
+mainMod = "SUPER"
+workspaceGroupSize = 10
+
+-- MONITOR CONFIG
+
 hl.monitor({ output = "DP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
 hl.monitor({ output = "DP-2", mode = "1920x1080@60", position = "1920x0", scale = 1 })
-
-------------------------
----- GESTURES ----------
-------------------------
+-- gestures
 hl.gesture({
 	fingers = 3,
 	direction = "swipe",
@@ -33,7 +60,6 @@ hl.gesture({
 	direction = "horizontal",
 	action = "workspace",
 })
--- NOTE: these need quickshell running (it is not started in AUTOSTART below)
 hl.gesture({
 	fingers = 4,
 	direction = "up",
@@ -49,9 +75,6 @@ hl.gesture({
 	end,
 })
 
-------------------------
----- CONFIG ------------
-------------------------
 hl.config({
 	gestures = {
 		workspace_swipe_distance = 700,
@@ -132,7 +155,149 @@ hl.config({
 		kb_layout = "us,cz,eg",
 		kb_variant = ",qwerty",
 		kb_options = "grp:alt_shift_toggle",
+	},
+})
+-- Curves
+hl.curve("expressiveFastSpatial", {
+	type = "bezier",
+	points = { { 0.42, 1.67 }, { 0.21, 0.90 } },
+})
+hl.curve("expressiveSlowSpatial", {
+	type = "bezier",
+	points = { { 0.39, 1.29 }, { 0.35, 0.98 } },
+})
+hl.curve("expressiveDefaultSpatial", {
+	type = "bezier",
+	points = { { 0.38, 1.21 }, { 0.22, 1.00 } },
+})
+hl.curve("emphasizedDecel", {
+	type = "bezier",
+	points = { { 0.05, 0.7 }, { 0.1, 1 } },
+})
+hl.curve("emphasizedAccel", {
+	type = "bezier",
+	points = { { 0.3, 0 }, { 0.8, 0.15 } },
+})
+hl.curve("standardDecel", {
+	type = "bezier",
+	points = { { 0, 0 }, { 0, 1 } },
+})
+hl.curve("menu_decel", {
+	type = "bezier",
+	points = { { 0.1, 1 }, { 0, 1 } },
+})
+hl.curve("menu_accel", {
+	type = "bezier",
+	points = { { 0.52, 0.03 }, { 0.72, 0.08 } },
+})
+hl.curve("stall", {
+	type = "bezier",
+	points = { { 1, -0.1 }, { 0.7, 0.85 } },
+})
+-- Configs
+-- windows
+hl.animation({
+	leaf = "windowsIn",
+	enabled = true,
+	speed = 3,
+	bezier = "emphasizedDecel",
+	style = "popin 80%",
+})
+hl.animation({
+	leaf = "fadeIn",
+	enabled = true,
+	speed = 3,
+	bezier = "emphasizedDecel",
+})
+hl.animation({
+	leaf = "windowsOut",
+	enabled = true,
+	speed = 2,
+	bezier = "emphasizedDecel",
+	style = "popin 90%",
+})
+hl.animation({
+	leaf = "fadeOut",
+	enabled = true,
+	speed = 2,
+	bezier = "emphasizedDecel",
+})
+hl.animation({
+	leaf = "windowsMove",
+	enabled = true,
+	speed = 3,
+	bezier = "emphasizedDecel",
+	style = "slide",
+})
+hl.animation({
+	leaf = "border",
+	enabled = true,
+	speed = 10,
+	bezier = "emphasizedDecel",
+})
 
+-- layers
+hl.animation({
+	leaf = "layersIn",
+	enabled = true,
+	speed = 2.7,
+	bezier = "emphasizedDecel",
+	style = "popin 93%",
+})
+hl.animation({
+	leaf = "layersOut",
+	enabled = true,
+	speed = 2.4,
+	bezier = "menu_accel",
+	style = "popin 94%",
+})
+-- fade
+hl.animation({
+	leaf = "fadeLayersIn",
+	enabled = true,
+	speed = 0.5,
+	bezier = "menu_decel",
+})
+hl.animation({
+	leaf = "fadeLayersOut",
+	enabled = true,
+	speed = 2.7,
+	bezier = "stall",
+})
+-- workspaces
+hl.animation({
+	leaf = "workspaces",
+	enabled = true,
+	speed = 7,
+	bezier = "menu_decel",
+	style = "slide",
+})
+-- specialWorkspace
+hl.animation({
+	leaf = "specialWorkspaceIn",
+	enabled = true,
+	speed = 2.8,
+	bezier = "emphasizedDecel",
+	style = "slidevert",
+})
+hl.animation({
+	leaf = "specialWorkspaceOut",
+	enabled = true,
+	speed = 1.2,
+	bezier = "emphasizedAccel",
+	style = "slidevert",
+})
+-- zoom
+hl.animation({
+	leaf = "zoomFactor",
+	enabled = true,
+	speed = 3,
+	bezier = "standardDecel",
+})
+
+hl.config({
+	input = {
+		kb_layout = "us",
 		numlock_by_default = true,
 		repeat_delay = 250,
 		repeat_rate = 35,
@@ -157,7 +322,7 @@ hl.config({
 		animate_manual_resizes = false,
 		animate_mouse_windowdragging = false,
 		enable_swallow = false,
-		swallow_regex = "(foot|kitty|alacritty|Alacritty)",
+		swallow_regex = "(foot|kitty|allacritty|Alacritty)",
 		on_focus_under_fullscreen = 2,
 		allow_session_lock_restore = true,
 		session_lock_xray = false,
@@ -171,7 +336,7 @@ hl.config({
 	},
 
 	cursor = {
-		zoom_factor = 1,
+		zoom_factor = 2,
 		zoom_rigid = false,
 		zoom_disable_aa = true,
 		hotspot_padding = 1,
@@ -183,7 +348,7 @@ hl.config({
 })
 
 ------------------------
----- AUTOSTART ---------
+---- AUTOSTART -------
 ------------------------
 -- exec-once has no direct keyword anymore; hook the session-start event instead
 hl.on("hyprland.start", function()
@@ -193,9 +358,8 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd(terminal)
 end)
 
-------------------------
----- KEYBINDS ----------
-------------------------
+require("hyprland.rules")
+
 hl.bind("SUPER + Return", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + A", hl.dsp.exec_cmd(ai))
@@ -203,10 +367,10 @@ hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + R", hl.dsp.exec_cmd(reload_waybar))
 
 hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))
+hl.bind("SUPER + Q", hl.dsp.window.close())
 hl.bind("SUPER + CTRL + Q", hl.dsp.exec_cmd("wlogout"))
 hl.bind("SUPER + T", hl.dsp.window.float({ action = "toggle" }))
 hl.bind("SUPER + F", hl.dsp.window.fullscreen({ mode = 0 })) -- fullscreen
-
 local function zoomfunction(value)
 	local zoomvalue = hl.get_config("cursor:zoom_factor")
 	if (zoomvalue + value) > 3.0 then
@@ -225,18 +389,18 @@ hl.bind("SUPER + Equal", function()
 	zoomfunction(0.3)
 end, { repeating = true, description = "Screen: Zoom in" })
 
--- Zoom with keypad
+--# Zoom with keypad
 hl.bind("SUPER + code:82", function()
 	zoomfunction(-0.3)
 end, { repeating = true })
 hl.bind("SUPER + code:86", function()
 	zoomfunction(0.3)
 end, { repeating = true })
--- Cursor zoom in/out (SUPER + scroll)
-hl.bind("SUPER + mouse_down", function()
+-- Cursor zoom in/out (mainMod + ALT + scroll)
+hl.bind("SUPER +  mouse_down", function()
 	zoomfunction(0.3)
 end)
-hl.bind("SUPER + mouse_up", function()
+hl.bind("SUPER +   mouse_up", function()
 	zoomfunction(-0.3)
 end)
 
@@ -245,30 +409,27 @@ hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Window: Move" })
 hl.bind("SUPER + mouse:274", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Window: Resize" })
-
--- Focus with arrow keys
-local arrows = { "Left", "Right", "Up", "Down" }
-local dirs = { "l", "r", "u", "d" }
 for i = 1, 4 do
+	local arrowkey = { "Left", "Right", "Up", "Down" }
+	local focusdir = { "l", "r", "u", "d" }
 	hl.bind(
-		"SUPER + " .. arrows[i],
-		hl.dsp.focus({ direction = dirs[i] }),
-		{ description = "Window: Focus " .. arrows[i] }
+		"SUPER + " .. arrowkey[i],
+		hl.dsp.focus({ direction = focusdir[i] }),
+		{ description = "Window: Focus " .. arrowkey[i] }
 	)
 end
-
--- Focus left/right with brackets
-local brackets = { "BracketLeft", "BracketRight" }
 for i = 1, 2 do
-	hl.bind("SUPER + " .. brackets[i], hl.dsp.focus({ direction = dirs[i] }))
+	local arrowkey = { "BracketLeft", "BracketRight" }
+	local focusdir = { "l", "r" }
+	hl.bind("SUPER + " .. arrowkey[i], hl.dsp.focus({ direction = focusdir[i] }))
 end
-
--- Move windows with arrow keys
 for i = 1, 4 do
+	local arrowkey = { "Left", "Right", "Up", "Down" }
+	local focusdir = { "l", "r", "u", "d" }
 	hl.bind(
-		"SUPER + SHIFT + " .. arrows[i],
-		hl.dsp.window.move({ direction = dirs[i] }),
-		{ description = "Window: Move " .. arrows[i] }
+		"SUPER + SHIFT + " .. arrowkey[i],
+		hl.dsp.window.move({ direction = focusdir[i] }),
+		{ description = "Window: Move " .. arrowkey[i] }
 	)
 end
 
@@ -278,7 +439,6 @@ end, { non_consuming = true })
 hl.bind("SUPER + Q", hl.dsp.window.close(), { description = "Window: Close" })
 hl.bind("SUPER + SHIFT + Q", hl.dsp.exec_cmd("hyprctl kill"), { description = "Window: Forcefully zap a window" })
 
--- Workspaces 1-10 (key 0 = workspace 10), plus numpad
 local numpadkey = {
 	"KP_End",
 	"KP_Down",
@@ -302,35 +462,37 @@ end
 
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratch"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:scratch" }))
-hl.bind(mainMod .. " + TAB", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + TAB ", hl.dsp.focus({ workspace = "e+1" }))
 
 --------------------------------------
 ---- WORKSPACE -> MONITOR MAPPING ----
 --------------------------------------
-for i = 1, 5 do
+for i = 0, 5 do
 	hl.workspace_rule({
 		workspace = tostring(i),
 		monitor = "DP-2",
-		default = i == 1,
+		default = i == 0,
 	})
 end
 
-for i = 6, 10 do
+for i = 6, 9 do
 	hl.workspace_rule({
 		workspace = tostring(i),
-		monitor = "DP-1",
-		default = i == 6,
+		monitor = "DO- 1",
 	})
 end
 
+hl.workspace_rule({
+	workspace = "scratch",
+	monitor = "DO- 1",
+})
 -------------------------
----- WINDOW RULES  ------
+---- WINDOW RULES  -----
 -------------------------
--- Verify class names with `hyprctl clients`
-hl.window_rule({ match = { class = "^(pavucontrol)$" }, float = true })
-hl.window_rule({ match = { class = "^(blueman-manager)$" }, float = true })
-hl.window_rule({ match = { class = "^(nm-connection-editor)$" }, float = true })
-hl.window_rule({ match = { class = "(?i)^(qalculate-gtk)$" }, float = true })
+hl.window_rule({ match = { title = "^(pavucontrol)$" }, float = true })
+hl.window_rule({ match = { title = "^(blueman-manager)$" }, float = true })
+hl.window_rule({ match = { title = "^(nm-connection-editor)$" }, float = true })
+hl.window_rule({ match = { title = "^(qalculate-gtk)$" }, float = true })
 hl.window_rule({ match = { title = "^(Picture-in-Picture)$" }, float = true })
-hl.window_rule({ match = { class = "ModernGL" }, workspace = "9" })
-hl.window_rule({ match = { class = "mpv" }, workspace = "9" })
+hl.window_rule({ match = { class = "ModernGL" }, workspace = "9", border_size = 10 })
+hl.window_rule({ match = { class = "mpv" }, workspace = "9", border_size = 10 })

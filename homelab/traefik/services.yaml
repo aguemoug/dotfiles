@@ -1,0 +1,47 @@
+http:
+  routers:
+    sonarr:
+      rule: "Host(`sonarr.home`)"
+      service: sonarr
+    radarr:
+      rule: "Host(`radarr.home`)"
+      service: radarr
+    prowlarr:
+      rule: "Host(`prowlarr.home`)"
+      service: prowlarr
+    bazarr:
+      rule: "Host(`bazarr.home`)"
+      service: bazarr
+    qbittorrent:
+      rule: "Host(`qbittorrent.home`)"
+      service: qbittorrent
+    homarr:
+      rule: "Host(`homarr.home`)"
+      service: homarr
+    audiobookshelf:
+      rule: "Host(`audiobooks.home`)"
+      service: audiobookshelf
+    proxmox:
+      rule: "Host(`proxmox.home`)"
+      service: proxmox
+    jellyfin:
+      rule: "Host(`jellyfin.home`)"
+      service: jellyfin
+
+  services:
+    sonarr: { loadBalancer: { servers: [{ url: "http://192.168.1.220:8989" }] } }
+    radarr: { loadBalancer: { servers: [{ url: "http://192.168.1.220:7878" }] } }
+    prowlarr: { loadBalancer: { servers: [{ url: "http://192.168.1.220:9696" }] } }
+    bazarr: { loadBalancer: { servers: [{ url: "http://192.168.1.220:6767" }] } }
+    qbittorrent: { loadBalancer: { servers: [{ url: "http://192.168.1.220:8080" }] } }
+    homarr: { loadBalancer: { servers: [{ url: "http://192.168.1.220:7575" }] } }
+    audiobookshelf: { loadBalancer: { servers: [{ url: "http://192.168.1.246:13378" }] } }
+    proxmox:
+      loadBalancer:
+        servers: [{ url: "https://192.168.1.244:8006" }]
+        serversTransport: "insecure-proxmox@file"
+    jellyfin: { loadBalancer: { servers: [{ url: "http://192.168.1.218:8096" }] } }
+
+  serversTransports:
+    insecure-proxmox:
+      insecureSkipVerify: true
