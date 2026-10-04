@@ -9,10 +9,27 @@ local function hostname()
 end
 
 local host = hostname()
-local ok, err = pcall(require, "host-" .. host)
+local ok, cfg = pcall(require, "host-" .. host)
 if not ok then
-	hl.notification.create({ text = "No host config for " .. host .. ": " .. tostring(err), timeout = 5000 })
+	hl.notification.create({ text = "No host config for " .. host .. ": " .. tostring(cfg), timeout = 5000 })
 end
+local INTERNAL = cfg.INTERNAL
+local EXTERNAL = cfg.EXTERNAL or ""
+local mirrored = false
+
+local function toggleMirror()
+	if mirrored then
+		hl.monitor({ output = EXTERNAL, mode = "preferred", position = "auto-right", scale = 1, mirror = "" })
+	else
+		hl.monitor({ output = EXTERNAL, mode = "preferred", position = "auto", scale = 1, mirror = INTERNAL })
+	end
+	mirrored = not mirrored
+end
+
+hl.monitor({ output = INTERNAL, mode = "1920x1080@60", position = "0x0", scale = 1 })
+toggleMirror()
+---arrows
+---
 ------------------------
 ---- VARIABLES ---------
 ------------------------
@@ -24,6 +41,7 @@ local ai = browser .. " --new-window https://chat.openai.com"
 local reload_waybar = "pkill waybar; waybar &"
 local mainMod = "SUPER"
 
+hl.bind(mainMod .. " + F8", toggleMirror)
 ------------------------
 ---- CONFIG ------------
 ------------------------

@@ -1,6 +1,12 @@
+---
 ---- MONITORS ----------
-hl.monitor({ output = "eDP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1, mirror = "eDP-1" })
+local INTERNAL = "eDP-1"
+local EXTERNAL = "" -- check with: hyprctl monitors
+
+-- hl.bind(mainMod .. " + F8", toggleMirror)
+--
+-- hl.monitor({ output = "eDP-1", mode = "1920x1080@60", position = "0x0", scale = 1 })
+-- hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1, mirror = "eDP-1" })
 ------------------------
 ---- GESTURES ----------
 ------------------------
@@ -34,3 +40,8 @@ hl.gesture({
 		hl.dispatch(hl.dsp.global("quickshell:overviewWorkspacesToggle"))
 	end,
 })
+
+return {
+	INTERNAL = "eDP-1",
+	EXTERNAL = "", -- empty = any monitor without its own rule
+}
