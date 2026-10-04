@@ -1,0 +1,7 @@
+vim.keymap.set("n", "<F5>", function()
+	vim.cmd("write")
+	local src = vim.fn.expand("%:p")
+	local out = vim.fn.expand("%:p:r")
+	vim.cmd("split | terminal gcc -Wall -Wextra -g -o '" .. out .. "' '" .. src .. "' && '" .. out .. "'")
+	vim.cmd("startinsert")
+end, { desc = "Compile and run C file" })
