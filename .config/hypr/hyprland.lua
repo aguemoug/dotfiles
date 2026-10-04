@@ -1,3 +1,18 @@
+local function hostname()
+	local f = io.open("/etc/hostname", "r")
+	if not f then
+		return "unknown"
+	end
+	local h = f:read("*l") or "unknown"
+	f:close()
+	return h
+end
+
+local host = hostname()
+local ok, err = pcall(require, "host-" .. host)
+if not ok then
+	hl.notification.create({ text = "No host config for " .. host .. ": " .. tostring(err), timeout = 5000 })
+end
 ------------------------
 ---- VARIABLES ---------
 ------------------------
