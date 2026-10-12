@@ -194,6 +194,7 @@ hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + A", hl.dsp.exec_cmd(ai))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("SUPER + R", hl.dsp.exec_cmd(reload_waybar))
+hl.bind("SUPER + O", hl.dsp.exec_cmd("obsidian"))
 
 hl.bind("SUPER + space", hl.dsp.exec_cmd(menu))
 hl.bind("SUPER + CTRL + Q", hl.dsp.exec_cmd("wlogout"))
